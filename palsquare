@@ -1,0 +1,50 @@
+/*
+ID: adityas9
+PROG: palsquare
+LANG: C++11                  
+*/
+#include<bits/stdc++.h>
+using namespace std;
+ifstream fin("palsquare.in");
+ofstream fout("palsquare.out");
+void base(long N,long B)
+{
+	string S;
+	long K=sqrt(N);
+	while(N)
+	{
+		if(N%B<=9)
+			S+=('0'+N%B);
+		else
+			S+=('A'+(N%B-10));
+		N/=B;
+		//K+=1;
+	}
+	if(S==string(S.rbegin(),S.rend()))
+	{
+		//cout<<K<<"\n";
+		string Q;
+		while(K)
+		{	
+			if(K%B<=9)
+				Q+=('0'+K%B);
+			else
+				Q+=('A'+(K%B-10));
+			K/=B;
+			//K+=1;
+		}
+		Q=string(Q.rbegin(),Q.rend());
+		fout<<Q<<" "<<S<<"\n";
+	}
+	//return string(S.rbegin(),S.rend());
+}
+int main()
+{
+	long B;
+	fin>>B;
+	fout<<"1 1\n";
+	for(long i=2;i<=300;i++)
+		base(i*i,B);
+		//cout<<base(i,B)<<" "<<base(i*i,B)<<"\n";
+	return 0;
+}
