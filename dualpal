@@ -1,0 +1,36 @@
+/*
+ID: adityas9
+PROG: dualpal
+LANG: C++11                  
+*/
+#include<bits/stdc++.h>
+using namespace std;
+ifstream fin("dualpal.in");
+ofstream fout("dualpal.out");
+bool palin(long N,long B)
+{
+	string S;
+	while(N)
+	{
+		S+=('0'+N%B);
+		N/=B;
+	}
+	return (S==string(S.rbegin(),S.rend()));
+}
+int main()
+{
+	long N,S,M=0;
+	fin>>N>>S;
+	for(long i=S+1;N;i++){
+		M=0;
+		for(long j=2;j<=10;j++){
+			if(palin(i,j)){
+				//cout<<j<<"------\n";
+				M+=1;}
+			if(M>1)
+				break;}
+		if(M>1){
+		fout<<i<<"\n";
+		N-=1;}}
+	return 0;
+}
