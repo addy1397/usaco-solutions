@@ -1,0 +1,44 @@
+/*
+ID: adityas9
+PROG: milk
+LANG: C++11                 
+*/
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	ifstream cin("milk.in");
+	ofstream cout("milk.out");
+	long N,M;
+	double A,B;
+	vector<pair<long,long> >Q;
+	cin>>N>>M;
+	for(long i=0;i<M;i++)
+	{
+		cin>>A>>B;
+		Q.push_back(make_pair(A,B));
+	}
+	sort(Q.begin(),Q.end());
+	//for(long i=0;i<M;i++)
+	//	cout<<Q[i].first<<" "<<Q[i].second<<"\n";
+	long i=0,S=0;
+	for(vector<pair<long,long> >::iterator it=Q.begin();it!=Q.end();it++)
+	//	cout<<it->first<<" "<<it->second<<"\n";
+	{
+		if((it->second)>=N)
+		{
+			S+=(N*(it->first));
+			//cout<<N*(Q[i].first);
+			break;
+		}
+		else
+		{
+			S+=((it->first)*(it->second));
+			//cout<<(Q[i].second)*(Q[i].first);
+			N-=(it->second);
+			i+=1;
+		}
+	}
+	cout<<S<<"\n";
+	return 0;
+}
