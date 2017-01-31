@@ -1,0 +1,40 @@
+/*
+ID: adityas9
+PROG: combo
+LANG: C++11
+*/
+#include<bits/stdc++.h>
+using namespace std;
+long max(long A,long B)
+{
+	if(A>B)
+		return A;
+	return B;
+}
+long check(long A,long B,long N)
+{
+	long L=abs(B-A);
+	if(L>N/2)
+		L=N-L;
+	return max((5-L),0);
+}
+int main()
+{
+	ofstream fout("combo.out");
+	ifstream fin("combo.in");
+	long N,A,B,C,D,E,F;
+	fin>>N>>A>>B>>C>>D>>E>>F;
+	if(N<6)
+		fout<<N*N*N<<"\n";
+	else
+	{
+		long L=check(A,D,N);
+		L*=check(B,E,N);
+		L*=check(C,F,N);
+		//if(L==0)
+		//	fout<<"249\n";
+		//else
+			fout<<250-L<<"\n";
+	}
+	return 0;
+}
