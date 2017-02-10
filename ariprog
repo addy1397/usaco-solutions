@@ -1,0 +1,50 @@
+/*
+ID: adityas9
+PROG: ariprog
+LANG: C++11              
+*/
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	ifstream fin("ariprog.in");
+	ofstream fout("ariprog.out");
+	long N,M;
+	set<long> A;
+	fin>>N>>M;
+	set<pair<long,long> > Z;
+	for(long i=0;i<=M;i++)
+		for(long j=0;j<=M;j++)
+			A.insert(i*i+j*j);
+	long H=1;
+	if(N>=4){
+		if(N<10)
+			H=4;
+		else
+			H=12;}
+	for(set<long>::iterator i=A.begin();i!=A.end();i++)
+		for(long j=H;((*i)+(N-1)*j)<=*(A.rbegin());j+=H)
+		{
+			bool flag=0;
+			long K=N,S;
+			S=(*i)+(K-1)*j;
+			while(K--)
+			{
+				if(A.find(S)==A.end())
+				{
+					flag=1;
+					break;
+				}
+				S-=j;
+			}
+			if(flag==0)
+				Z.insert(make_pair(j,(*i)));
+				//cout<<(*i)<<" "<<j<<"\n"; 
+		}
+	if(Z.empty())
+		fout<<"NONE\n";
+	else
+		for(set<pair<long,long> >::iterator i=Z.begin();i!=Z.end();i++)
+			fout<<i->second<<" "<<i->first<<"\n";
+	return 0;
+}
