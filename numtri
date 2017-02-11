@@ -1,0 +1,25 @@
+/*
+ID: adityas9
+PROG: numtri
+LANG: C++11                  
+*/
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	ifstream cin("numtri.in");
+	ofstream cout("numtri.out");
+	int N,A[1009][1009];
+	cin>>N;
+	for(long i=0;i<N;i++)
+		for(long j=0;j<=i;j++)
+			cin>>A[i][j];
+	for(long i=N-2;i>=0;i--)
+		for(long j=0;j<=i;j++){
+			A[i][j]+=max(A[i+1][j],A[i+1][j+1]);
+			//cout<<A[i][j]<<" ";
+		}
+		//cout<<"\n";}
+	cout<<A[0][0]<<"\n";
+	return 0;
+}
