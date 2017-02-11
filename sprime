@@ -1,0 +1,46 @@
+/*
+ID: adityas9
+PROG: sprime
+LANG: C++11               
+*/
+#include<bits/stdc++.h>
+using namespace std;
+ifstream fin("sprime.in");
+ofstream fout("sprime.out");
+bool prime(long N,long K)
+{
+	if(N==2)
+		return 1;
+	if(N%2==0)
+		return 0;
+	for(long i=3;i<=K;i+=2)
+		if(N%i==0)
+			return 0;
+		return 1; 
+}
+void check(long N,int i,int K)
+{
+	if(prime(N,sqrt(N))){
+		if(i==K)
+			fout<<N<<"\n";
+		else
+		{
+			check(N*10+1,i+1,K);
+			check(N*10+3,i+1,K);
+			//check(N*10+5,i+1,K);
+			check(N*10+7,i+1,K);
+			check(N*10+9,i+1,K);
+		}}
+	else
+		return ;
+}
+int main()
+{
+	long N;
+	fin>>N;
+	check(2,1,N);
+	check(3,1,N);
+	check(5,1,N);
+	check(7,1,N);
+	return 0;
+}
