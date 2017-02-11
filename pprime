@@ -1,0 +1,84 @@
+/*
+ID: adityas9
+PROG: pprime
+LANG: C++11 
+*/
+#include<bits/stdc++.h>
+using namespace std;
+ifstream fin("pprime.in");
+ofstream fout("pprime.out");
+set<long> Z;
+void prime(string S)
+{
+	long N=0,K=S.size();
+	for(long i=0;i<K;i++)
+	{
+		N*=10;
+		N+=(S[i]-48);
+	}
+	if(N==2)
+		Z.insert(N);
+	if(N%2==0)
+		return ;
+	long H=sqrt(N);
+	for(long i=3;i<=H;i+=2)
+		if(N%i==0)
+			return ;
+	Z.insert(N);
+}
+void check(string S,int i,int N)
+{
+	if(i==N){
+		prime(S);
+		return ;
+	}
+	else
+	{
+		check("0"+S+"0",i+2,N);
+		check("1"+S+"1",i+2,N);
+		check("2"+S+"2",i+2,N);
+		check("3"+S+"3",i+2,N);
+		check("4"+S+"4",i+2,N);
+		check("5"+S+"5",i+2,N);
+		check("6"+S+"6",i+2,N);
+		check("7"+S+"7",i+2,N);
+		check("8"+S+"8",i+2,N);
+		check("9"+S+"9",i+2,N);
+	}
+	return ;
+}
+int main()
+{
+	for(int N=1;N<=7;N+=2){
+	check("0",1,N);
+	check("1",1,N);
+	check("2",1,N);
+	check("3",1,N);
+	check("4",1,N);
+	check("5",1,N);
+	check("6",1,N);
+	check("7",1,N);
+	check("8",1,N);
+	check("9",1,N);}
+	for(int N=2;N<=8;N+=2){
+	check("",0,N);
+	check("",0,N);
+	check("",0,N);
+	check("",0,N);
+	check("",0,N);
+	check("",0,N);
+	check("",0,N);
+	check("",0,N);
+	check("",0,N);
+	check("",0,N);
+	}
+	long A,B;
+	fin>>A>>B;
+	set<long>::iterator i=Z.begin();
+	for(;i!=Z.end();i++)
+		if((*i)>=A)
+			break;
+	for(;i!=Z.end() && (*i)<=B;i++)
+		fout<<*i<<"\n";
+	return 0;
+}
