@@ -1,0 +1,85 @@
+/*
+ID: adityas9
+PROG: milk3
+LANG: C++11                  
+*/
+#include<bits/stdc++.h>
+using namespace std;
+long A1,B1,C1;
+set<long> Z;
+set<long> AA;
+set<long> BB;
+set<long> CC;
+ifstream fin("milk3.in");
+ofstream fout("milk3.out");
+void check(long A,long B,long C)
+{
+	//fout<<A<<" "<<B<<" "<<C<<"\n";
+	if(A==0){
+		if(Z.find(C)==Z.end()){
+			//fout<<A<<" "<<B<<" "<<C<<"\n";
+			Z.insert(C);
+		}
+		else
+			return ;}	
+	bool S,D,F;
+	S=D=F=0;
+	if(AA.find(A)==AA.end())
+		AA.insert(A);
+	else
+		S=1;
+	if(BB.find(B)==BB.end())
+		BB.insert(B);
+	else
+		D=1;
+	if(CC.find(C)==CC.end())
+		CC.insert(C);
+	else
+		F=1;
+	/*if(S==1 && D==1)
+		return ;
+	if(S==1 && F==1)
+		return ;
+	if(D==1 && F==1)
+		return ;*/
+	if(S==1 && D==1 && F==1)
+		return ;
+	if(C>(A1-A))
+		check(A1,B,C-(A1-A));
+	else
+		check(A+C,B,0);
+	if(C>(B1-B))
+		check(A,B1,C-(B1-B));
+	else
+		check(A,C+B,0);
+	if(B>(A1-A))
+		check(A1,B-(A1-A),C);
+	else
+		check(B+A,0,C);
+	if(B>(C1-C))
+		check(A,B-(C1-C),C1);
+	else
+		check(A,0,B+C);
+	if(A>(C1-C))
+		check(A-(C1-C),B,C1);
+	else
+		check(0,B,A+C);
+	if(A>(B1-B))
+		check(A-(B1-B),B1,C);
+	else
+		check(0,A+B,C);
+	return ;
+}
+int main()
+{
+	fin>>A1>>B1>>C1;
+	check(0,0,C1);
+	vector<long> L;
+	for(set<long>::iterator it=Z.begin();it!=Z.end();it++)
+		L.push_back(*it);
+	long N=L.size();
+	for(long i=0;i<N-1;i++)
+		fout<<L[i]<<" ";
+	fout<<L[N-1]<<"\n";
+	return 0;
+}
