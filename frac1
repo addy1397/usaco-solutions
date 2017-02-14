@@ -1,0 +1,28 @@
+/*
+ID: adityas9
+PROG: frac1
+LANG: C++11
+*/
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	set<pair<double,pair<long,long> > >Z;
+	set<double> P;
+	ifstream cin("frac1.in");
+	ofstream cout("frac1.out");
+	long N;
+	cin>>N;
+	for(long i=0;i<=N;i++)
+		for(long j=i+1;j<=N;j++){
+			Z.insert(make_pair(i/double(j),make_pair(i,j)));
+			P.insert(i/double(j));}
+	//cout<<"0/1\n";
+	for(set<pair<double,pair<long,long> > >::iterator it=Z.begin();it!=Z.end();it++)
+		if(P.find(it->first)!=P.end()){
+			cout<<(it->second).first<<"/"<<(it->second).second<<"\n";
+			P.erase(it->first);
+		}
+	cout<<"1/1\n";
+	return 0;
+}
